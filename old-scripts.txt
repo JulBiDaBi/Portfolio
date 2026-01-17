@@ -1,0 +1,2137 @@
+==> Style.css ---> OLD Version
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   1. Reset & base
+   ========================= */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply m-0 p-0 box-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-screen antialiased;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+      "Helvetica Neue", sans-serif;
+  }
+
+  /* -------- Mode clair -------- */
+  [data-theme="light"] body {
+    @apply bg-slate-50 text-slate-900;
+  }
+
+  /* -------- Mode sombre -------- */
+  [data-theme="dark"] body {
+    @apply bg-slate-950 text-slate-100;
+  }
+
+  #root {
+    @apply min-h-screen flex justify-center;
+  }
+}
+
+/* =========================
+   2. Layout global
+   ========================= */
+@layer components {
+  /* Conteneur principal centré façon « page » */
+  .page-shell {
+    @apply w-full max-w-5xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12;
+  }
+
+  .page-grid {
+    @apply grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,2fr)];
+  }
+
+  /* Carte profil à gauche (ou en haut sur mobile) */
+  .profile-card {
+    @apply rounded-2xl border shadow-sm;
+  }
+
+  [data-theme="light"] .profile-card {
+    @apply bg-white border-slate-200 shadow-slate-200/60;
+  }
+
+  [data-theme="dark"] .profile-card {
+    @apply bg-slate-900/80 border-slate-800 shadow-black/40;
+  }
+
+  /* Colonne contenu (expérience, éducation, etc.) */
+  .content-column {
+    @apply space-y-8;
+  }
+
+  [data-theme="light"] .content-section {
+    @apply rounded-2xl bg-white border border-slate-200 shadow-sm shadow-slate-200/60;
+  }
+
+  [data-theme="dark"] .content-section {
+    @apply rounded-2xl bg-slate-900/80 border border-slate-800 shadow-black/40;
+  }
+
+  .content-section-inner {
+    @apply px-5 sm:px-6 lg:px-7 py-5 sm:py-6;
+  }
+}
+
+/* =========================
+   3. Navigation / header
+   ========================= */
+@layer components {
+  .top-nav {
+    @apply mb-6 flex items-center justify-between gap-3 text-sm;
+  }
+
+  .nav-links {
+    @apply hidden md:flex gap-4;
+  }
+
+  .nav-link {
+    @apply cursor-pointer font-medium text-slate-500 hover:text-slate-900;
+  }
+
+  [data-theme="dark"] .nav-link {
+    @apply text-slate-400 hover:text-slate-100;
+  }
+
+  .theme-toggle-btn {
+    @apply inline-flex items-center justify-center rounded-full border px-3 py-1 text-xs font-medium transition;
+  }
+
+  [data-theme="light"] .theme-toggle-btn {
+    @apply border-slate-200 bg-white text-slate-700 hover:bg-slate-50;
+  }
+
+  [data-theme="dark"] .theme-toggle-btn {
+    @apply border-slate-700 bg-slate-900 text-slate-200 hover:bg-slate-800;
+  }
+}
+
+/* =========================
+   4. Carte profil
+   ========================= */
+@layer components {
+  .profile-header {
+    @apply flex flex-col items-start gap-4 p-5 sm:p-6;
+  }
+
+  .profile-main-row {
+    @apply flex w-full items-center gap-4;
+  }
+
+  .avatar {
+    @apply h-16 w-16 rounded-2xl bg-slate-200 flex items-center justify-center text-lg font-semibold text-slate-700;
+  }
+
+  [data-theme="dark"] .avatar {
+    @apply bg-slate-800 text-slate-100;
+  }
+
+  .profile-name {
+    @apply text-2xl sm:text-3xl font-semibold tracking-tight;
+  }
+
+  .profile-title {
+    @apply text-sm font-medium text-slate-500;
+  }
+
+  [data-theme="dark"] .profile-title {
+    @apply text-slate-400;
+  }
+
+  .profile-summary {
+    @apply mt-3 text-sm leading-relaxed text-slate-600;
+  }
+
+  [data-theme="dark"] .profile-summary {
+    @apply text-slate-300;
+  }
+
+  .profile-actions {
+    @apply mt-4 flex flex-wrap gap-3;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition;
+  }
+
+  [data-theme="light"] .btn-primary {
+    @apply bg-slate-900 text-white hover:bg-slate-800;
+  }
+
+  [data-theme="dark"] .btn-primary {
+    @apply bg-slate-100 text-slate-900 hover:bg-slate-200;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition;
+  }
+
+  [data-theme="light"] .btn-outline {
+    @apply border-slate-200 text-slate-700 hover:bg-slate-50;
+  }
+
+  [data-theme="dark"] .btn-outline {
+    @apply border-slate-600 text-slate-100 hover:bg-slate-800;
+  }
+
+  .social-row {
+    @apply mt-4 flex items-center gap-3 text-slate-500;
+  }
+
+  [data-theme="dark"] .social-row {
+    @apply text-slate-400;
+  }
+
+  .social-icon {
+    @apply inline-flex h-9 w-9 items-center justify-center rounded-full border transition;
+  }
+
+  [data-theme="light"] .social-icon {
+    @apply border-slate-200 hover:bg-slate-50;
+  }
+
+  [data-theme="dark"] .social-icon {
+    @apply border-slate-700 hover:bg-slate-800;
+  }
+
+  .profile-meta {
+    @apply mt-4 flex flex-wrap gap-3 text-xs text-slate-500;
+  }
+
+  [data-theme="dark"] .profile-meta {
+    @apply text-slate-400;
+  }
+
+  .meta-pill {
+    @apply inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1;
+  }
+
+  [data-theme="dark"] .meta-pill {
+    @apply bg-slate-800;
+  }
+}
+
+/* =========================
+   5. Sections (Experience, etc.)
+   ========================= */
+@layer components {
+  .section-header {
+    @apply mb-4 flex items-center justify-between gap-3;
+  }
+
+  .section-title {
+    @apply text-base sm:text-lg font-semibold tracking-tight;
+  }
+
+  .section-subtitle {
+    @apply text-xs font-medium uppercase tracking-[0.16em] text-slate-400;
+  }
+
+  .timeline {
+    @apply mt-2 space-y-5;
+  }
+
+  .timeline-item {
+    @apply flex flex-col gap-2 sm:flex-row sm:gap-4;
+  }
+
+  .timeline-meta {
+    @apply w-full sm:w-40 text-xs text-slate-400;
+  }
+
+  .timeline-main {
+    @apply flex-1;
+  }
+
+  .timeline-role {
+    @apply text-sm font-semibold text-slate-900;
+  }
+
+  [data-theme="dark"] .timeline-role {
+    @apply text-slate-100;
+  }
+
+  .timeline-company {
+    @apply text-sm font-medium text-slate-500;
+  }
+
+  [data-theme="dark"] .timeline-company {
+    @apply text-slate-400;
+  }
+
+  .timeline-location {
+    @apply text-xs text-slate-400;
+  }
+
+  .timeline-description {
+    @apply mt-1 text-sm leading-relaxed text-slate-600;
+  }
+
+  [data-theme="dark"] .timeline-description {
+    @apply text-slate-300;
+  }
+
+  .pill-row {
+    @apply mt-2 flex flex-wrap gap-2;
+  }
+
+  .skill-pill {
+    @apply rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700;
+  }
+
+  [data-theme="dark"] .skill-pill {
+    @apply bg-slate-800 text-slate-100;
+  }
+}
+
+/* =========================
+   6. Scrollbar + animations
+   ========================= */
+@layer utilities {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  [data-theme="light"] ::-webkit-scrollbar-track {
+    @apply bg-slate-100;
+  }
+
+  [data-theme="dark"] ::-webkit-scrollbar-track {
+    @apply bg-slate-900;
+  }
+
+  [data-theme="light"] ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded;
+  }
+
+  [data-theme="dark"] ::-webkit-scrollbar-thumb {
+    @apply bg-slate-700 rounded;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-500;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.5s ease-out both;
+  }
+}
+
+-----------------------------------------------------
+==> config/tailwind.config.js
+export default {
+  content: ["../index.html", "../src/**/*.{js,ts,jsx,tsx"],
+  // content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        "bleu-portfolio": "#1e3a8a", // ton bleu foncé custom
+      },
+    },
+  },
+  plugins: [],
+};
+
+-------------------------------------------------------------
+==> src/MyPortfolio.jsx
+import React, { useState, useEffect } from "react";
+import {
+  Menu,
+  X,
+  Moon,
+  Sun,
+  Mail,
+  Linkedin,
+  Github,
+  Download,
+  ChevronRight,
+  Code,
+  Database,
+  BarChart3,
+  Brain,
+  Award,
+  Briefcase,
+} from "lucide-react";
+
+const MyPortfolio = () => {
+  const [darkMode, setDarkMode] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = [
+        "home",
+        "experience",
+        "education",
+        "projects",
+        "skills",
+        "leadership",
+        "contact",
+      ];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setMobileMenuOpen(false);
+    }
+  };
+
+  const navItems = [
+    { id: "home", label: "Home" },
+    { id: "experience", label: "Experience" },
+    { id: "education", label: "Education" },
+    { id: "projects", label: "Projects" },
+    { id: "skills", label: "Skills" },
+    { id: "leadership", label: "Leadership" },
+    { id: "contact", label: "Contact" },
+  ];
+
+  const experiences = [
+    {
+      period: "Sept. 2024 – Sept. 2025",
+      role: "Data Scientist – AI Vision Project Manager",
+      company: "Groupe BEL",
+      location: "Suresnes, France",
+      achievements: [
+        "Designed and developed consolidated international tracking reports on Power BI",
+        "Automated label traceability online using PowerApps, Power Automate, Power BI, and SharePoint",
+        "Collected, integrated, and processed data from diverse sources (Power Query)",
+        "Drafted Computer Vision specifications in collaboration with business teams",
+        "Optimized production line quality via AI vision system (YOLO, PyTorch)",
+        "Virtual factory simulation (Plant Simulation)",
+      ],
+      results:
+        "Designed and deployed a unified AI architecture (edge/cloud) for 27 factories, integrating an AI Model Foundry, Dataset Repository, and AI Marketplace. Result: standardized solutions, reduced costs, and accelerated international AI model deployment.",
+      stack: [
+        "Power BI",
+        "PowerApps",
+        "Power Automate",
+        "SharePoint",
+        "YOLO",
+        "PyTorch",
+        "Plant Simulation",
+        "Power Query",
+      ],
+    },
+    {
+      period: "Mar. 2024 – Sept. 2024",
+      role: "Data Quality Analyst",
+      company: "Business France",
+      location: "Paris, France",
+      achievements: [
+        "Facilitated workshops to identify key business indicators",
+        "Designed data models, created KPIs and reports (Power BI)",
+        "Collected, extracted, and transformed data from various sources",
+        "Performed statistical and quantitative data analysis to ensure quality",
+        "Implemented quality test protocols and automation (Azure Data Factory)",
+        "Contributed to data migration and consistency",
+      ],
+      results:
+        "Scoped requirements, modeled and industrialized KPIs, quality testing, and migration to Azure. Result: more stable dashboards, reduced testing time, and improved cross-application consistency.",
+      stack: ["Power BI", "Azure Data Factory", "SQL", "Python", "Excel"],
+    },
+    {
+      period: "June 2023 – Sept. 2023",
+      role: "Business Intelligence Analyst",
+      company: "Sector Alarm",
+      location: "Massy, France",
+      achievements: [
+        "Identified business needs and prepared data (SQL & Python)",
+        "Built and tracked KPIs, implemented dashboards (Power BI & Excel)",
+        "Developed and automated weekly reports (Power BI)",
+        "Conducted ad hoc analyses and participated in budget construction",
+      ],
+      results:
+        "Established indicators, automated reports, and consolidated data foundation. Result: unified performance view and weekly time savings on reporting.",
+      stack: ["Power BI", "SQL", "Python", "Excel"],
+    },
+  ];
+
+  const projects = [
+    {
+      category: "AI/ML",
+      items: [
+        {
+          title: "Real-time Hand Gesture Detection for Sign Language",
+          description:
+            "Developed a system to detect and recognize hand gestures in real-time for sign language interpretation",
+          stack: ["OpenCV", "MediaPipe", "TensorFlow"],
+          icon: <Brain className="w-6 h-6" />,
+        },
+        {
+          title: "Emotion Detection and Recognition",
+          description:
+            "Built a facial emotion recognition system capable of identifying human emotions",
+          stack: ["Keras", "YOLO"],
+          icon: <Brain className="w-6 h-6" />,
+        },
+        {
+          title: "Medical Intelligent Chatbot",
+          description:
+            "Created an AI-powered medical chatbot for intelligent healthcare assistance",
+          stack: ["NLTK", "Transformers", "LangChain", "LLaMA"],
+          icon: <Brain className="w-6 h-6" />,
+        },
+        {
+          title: "Movie Recommendation System",
+          description:
+            "Designed a recommendation engine using collaborative filtering and matrix factorization",
+          stack: ["Collaborative Filtering", "Matrix Factorization"],
+          icon: <Brain className="w-6 h-6" />,
+        },
+        {
+          title: "Speech Transcription",
+          description:
+            "Implemented automatic speech-to-text transcription system",
+          stack: ["DeepSpeech", "Whisper", "Librosa"],
+          icon: <Brain className="w-6 h-6" />,
+        },
+        {
+          title: "Customer Review Sentiment Analysis",
+          description:
+            "Analyzed customer sentiment from reviews using NLP techniques",
+          stack: ["NLTK", "BERT"],
+          icon: <Brain className="w-6 h-6" />,
+        },
+      ],
+    },
+    {
+      category: "Data Engineering & Visualization",
+      items: [
+        {
+          title: "End-to-End Azure Data Pipeline",
+          description:
+            "Built complete data injection pipeline for Adventure Works and Yahoo data using Microsoft Azure",
+          stack: [
+            "Azure Data Factory",
+            "Databricks",
+            "Azure Synapse",
+            "Azure Data Lake",
+            "Power BI",
+          ],
+          icon: <Database className="w-6 h-6" />,
+        },
+        {
+          title: "URSAFF Power BI Report",
+          description:
+            "Created comprehensive Power BI report analyzing URSAFF data",
+          stack: ["Power Query", "DAX", "Data Modeling"],
+          icon: <BarChart3 className="w-6 h-6" />,
+        },
+      ],
+    },
+  ];
+
+  const skills = {
+    languages: ["Python", "SQL", "R", "PySpark"],
+    dataViz: ["Power BI (Expert)", "Looker Studio", "Excel (Advanced)"],
+    etl: ["Azure Data Factory", "Dataiku", "Talend"],
+    ml: [
+      "PyTorch",
+      "Scikit-learn",
+      "TensorFlow",
+      "YOLO",
+      "OpenCV",
+      "Roboflow",
+      "Label Studio",
+      "Librosa",
+      "LLM/NLP",
+      "Transformers",
+      "KNN",
+      "Time Series",
+      "DINO",
+      "RT-DETR",
+    ],
+    databases: ["SQL Server", "SAP"],
+    tools: [
+      "Microsoft Azure",
+      "Azure DevOps",
+      "Azure Data Factory",
+      "Azure AI Foundry",
+      "Microsoft Fabric",
+    ],
+    methodologies: ["Agile Scrum", "Kanban"],
+  };
+
+  const certifications = [
+    "Databricks Fundamentals",
+    "Databricks Lakehouse Platform",
+    "Dataiku Core Designer",
+    "Dataiku Generative AI Practitioner",
+    "Dataiku Advanced Designer",
+    "Dataiku MLOps Practitioner",
+    "Microsoft Power BI – PL300 (in progress)",
+  ];
+
+  return (
+    <div
+      className={`min-h-screen transition-colors duration-300 ${
+        darkMode ? "bg-[#0f172a] text-gray-100" : "bg-gray-50 text-gray-900"
+      }`}
+    >
+      {/* Sticky Navigation */}
+      <nav
+        className={`fixed top-0 w-full z-50 transition-colors duration-300 ${
+          darkMode
+            ? "bg-gray-900/95 border-gray-800"
+            : "bg-white/95 border-gray-200"
+        } backdrop-blur-sm border-b`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-2">
+              <Code
+                className={`w-6 h-6 ${
+                  darkMode ? "text-blue-400" : "text-blue-600"
+                }`}
+              />
+              <span className="font-bold text-xl">JH</span>
+            </div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`transition-colors hover:text-blue-400 ${
+                    activeSection === item.id ? "text-blue-400 font-medium" : ""
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+              <button
+                onClick={() => setDarkMode(!darkMode)}
+                className={`p-2 rounded-lg transition-colors ${
+                  darkMode ? "hover:bg-gray-800" : "hover:bg-gray-200"
+                }`}
+              >
+                {darkMode ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                )}
+              </button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center space-x-2">
+              <button
+                onClick={() => setDarkMode(!darkMode)}
+                className={`p-2 rounded-lg transition-colors ${
+                  darkMode ? "hover:bg-gray-800" : "hover:bg-gray-200"
+                }`}
+              >
+                {darkMode ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                )}
+              </button>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className={`p-2 rounded-lg transition-colors ${
+                  darkMode ? "hover:bg-gray-800" : "hover:bg-gray-200"
+                }`}
+              >
+                {mobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div
+            className={`md:hidden border-t ${
+              darkMode
+                ? "border-gray-800 bg-gray-900"
+                : "border-gray-200 bg-white"
+            }`}
+          >
+            <div className="px-4 py-4 space-y-3">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`block w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                    activeSection === item.id
+                      ? "bg-blue-600 text-white"
+                      : darkMode
+                      ? "hover:bg-gray-800"
+                      : "hover:bg-gray-100"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* Home Section */}
+      <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <div
+                className={`inline-block px-4 py-2 rounded-full mb-6 ${
+                  darkMode
+                    ? "bg-blue-600/20 text-blue-400"
+                    : "bg-blue-100 text-blue-600"
+                }`}
+              >
+                <span className="flex items-center space-x-2">
+                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                  <span>Available for opportunities</span>
+                </span>
+              </div>
+              <h1 className="text-5xl md:text-6xl font-bold mb-4">
+                Julien{" "}
+                <span className={darkMode ? "text-blue-400" : "text-blue-600"}>
+                  HODONOU
+                </span>
+              </h1>
+              <h2 className="text-2xl md:text-3xl mb-6 text-gray-400">
+                Data Analyst | Data Scientist
+              </h2>
+              <p
+                className={`text-lg mb-8 leading-relaxed ${
+                  darkMode ? "text-gray-300" : "text-gray-600"
+                }`}
+              >
+                Passionate about data with proven expertise in data analysis,
+                machine learning, statistical modeling, and data visualization.
+                I master SQL, Python, and other key tools. I have the ability to
+                translate business needs into relevant analytical solutions and
+                effectively communicate results. I want to leverage my skills
+                and experience in service of a dynamic company to contribute to
+                its growth by exploiting the value of its data.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="mailto:julienhodonou21@gmail.com"
+                  className={`inline-flex items-center px-6 py-3 rounded-lg font-medium transition-all ${
+                    darkMode
+                      ? "bg-blue-600 hover:bg-blue-700 text-white"
+                      : "bg-blue-600 hover:bg-blue-700 text-white"
+                  }`}
+                >
+                  <Mail className="w-5 h-5 mr-2" />
+                  Get in Touch
+                </a>
+                <button
+                  onClick={() => window.open("#", "_blank")}
+                  className={`inline-flex items-center px-6 py-3 rounded-lg font-medium transition-all ${
+                    darkMode
+                      ? "border-2 border-gray-700 hover:border-blue-400 hover:text-blue-400"
+                      : "border-2 border-gray-300 hover:border-blue-600 hover:text-blue-600"
+                  }`}
+                >
+                  <Download className="w-5 h-5 mr-2" />
+                  Download CV
+                </button>
+              </div>
+              <div className="flex space-x-6 mt-8">
+                <a
+                  href="https://www.linkedin.com/in/julien-hodonou"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`transition-colors ${
+                    darkMode ? "hover:text-blue-400" : "hover:text-blue-600"
+                  }`}
+                >
+                  <Linkedin className="w-6 h-6" />
+                </a>
+                <a
+                  href="https://github.com/JulBiDaBi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`transition-colors ${
+                    darkMode ? "hover:text-blue-400" : "hover:text-blue-600"
+                  }`}
+                >
+                  <Github className="w-6 h-6" />
+                </a>
+              </div>
+            </div>
+            <div className="relative">
+              <div
+                className={`aspect-square rounded-2xl ${
+                  darkMode ? "bg-gray-800" : "bg-gray-200"
+                } flex items-center justify-center overflow-hidden`}
+              >
+                <div className="text-center p-8">
+                  <div
+                    className={`w-48 h-48 mx-auto rounded-full ${
+                      darkMode ? "bg-gray-700" : "bg-gray-300"
+                    } flex items-center justify-center mb-4`}
+                  >
+                    <span className="text-6xl font-bold text-gray-500">JH</span>
+                  </div>
+                  <p className="text-sm text-gray-500 italic">
+                    Professional headshot placeholder
+                  </p>
+                </div>
+              </div>
+              <div
+                className={`absolute -bottom-6 -right-6 px-6 py-4 rounded-xl ${
+                  darkMode ? "bg-blue-600" : "bg-blue-500"
+                } text-white shadow-xl`}
+              >
+                <div className="text-3xl font-bold">2+</div>
+                <div className="text-sm">Years Experience</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section - Continued in Part 2 */}
+      <section
+        id="experience"
+        className={`py-20 px-4 sm:px-6 lg:px-8 ${
+          darkMode ? "bg-gray-800/50" : "bg-white"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center mb-12">
+            <Briefcase
+              className={`w-8 h-8 mr-4 ${
+                darkMode ? "text-blue-400" : "text-blue-600"
+              }`}
+            />
+            <h2 className="text-4xl font-bold">Professional Experience</h2>
+          </div>
+          <div className="space-y-12">
+            {experiences.map((exp, idx) => (
+              <div
+                key={idx}
+                className={`rounded-xl p-8 transition-all hover:shadow-xl ${
+                  darkMode
+                    ? "bg-gray-900 hover:bg-gray-800"
+                    : "bg-gray-50 hover:bg-gray-100"
+                }`}
+              >
+                <div className="flex flex-wrap justify-between items-start mb-4">
+                  <div>
+                    <h3
+                      className={`text-2xl font-bold mb-2 ${
+                        darkMode ? "text-blue-400" : "text-blue-600"
+                      }`}
+                    >
+                      {exp.role}
+                    </h3>
+                    <p className="text-xl font-semibold mb-1">{exp.company}</p>
+                    <p className="text-gray-500">{exp.location}</p>
+                  </div>
+                  <span
+                    className={`px-4 py-2 rounded-full text-sm font-medium ${
+                      darkMode
+                        ? "bg-gray-800 text-gray-300"
+                        : "bg-gray-200 text-gray-700"
+                    }`}
+                  >
+                    {exp.period}
+                  </span>
+                </div>
+                <ul className="space-y-2 mb-6">
+                  {exp.achievements.map((achievement, i) => (
+                    <li key={i} className="flex items-start">
+                      <ChevronRight
+                        className={`w-5 h-5 mr-2 mt-0.5 flex-shrink-0 ${
+                          darkMode ? "text-blue-400" : "text-blue-600"
+                        }`}
+                      />
+                      <span
+                        className={darkMode ? "text-gray-300" : "text-gray-700"}
+                      >
+                        {achievement}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <div
+                  className={`p-4 rounded-lg mb-4 ${
+                    darkMode
+                      ? "bg-blue-600/10 border border-blue-600/20"
+                      : "bg-blue-50 border border-blue-200"
+                  }`}
+                >
+                  <p
+                    className={`font-medium mb-2 ${
+                      darkMode ? "text-blue-400" : "text-blue-600"
+                    }`}
+                  >
+                    Key Results:
+                  </p>
+                  <p className={darkMode ? "text-gray-300" : "text-gray-700"}>
+                    {exp.results}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {exp.stack.map((tech, i) => (
+                    <span
+                      key={i}
+                      className={`px-3 py-1 rounded-full text-sm ${
+                        darkMode
+                          ? "bg-gray-800 text-gray-300"
+                          : "bg-gray-200 text-gray-700"
+                      }`}
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section id="education" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center mb-12">
+            <Award
+              className={`w-8 h-8 mr-4 ${
+                darkMode ? "text-blue-400" : "text-blue-600"
+              }`}
+            />
+            <h2 className="text-4xl font-bold">Education</h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div
+              className={`rounded-xl p-8 transition-all hover:shadow-xl ${
+                darkMode
+                  ? "bg-gray-900 hover:bg-gray-800"
+                  : "bg-white hover:bg-gray-50"
+              }`}
+            >
+              <div
+                className={`inline-block px-4 py-2 rounded-full mb-4 ${
+                  darkMode
+                    ? "bg-blue-600/20 text-blue-400"
+                    : "bg-blue-100 text-blue-600"
+                }`}
+              >
+                2022 - 2024
+              </div>
+              <h3 className="text-2xl font-bold mb-2">
+                Master's in Big Data & Business Intelligence
+              </h3>
+              <p
+                className={`text-lg mb-4 ${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                Université Sorbonne Paris Nord
+              </p>
+              <p className={darkMode ? "text-gray-300" : "text-gray-700"}>
+                Specialized in advanced data analytics, machine learning,
+                statistical modeling, and business intelligence solutions.
+              </p>
+            </div>
+            <div
+              className={`rounded-xl p-8 transition-all hover:shadow-xl ${
+                darkMode
+                  ? "bg-gray-900 hover:bg-gray-800"
+                  : "bg-white hover:bg-gray-50"
+              }`}
+            >
+              <div
+                className={`inline-block px-4 py-2 rounded-full mb-4 ${
+                  darkMode
+                    ? "bg-blue-600/20 text-blue-400"
+                    : "bg-blue-100 text-blue-600"
+                }`}
+              >
+                2020 - 2022
+              </div>
+              <h3 className="text-2xl font-bold mb-2">
+                Master's Research in International Economics & Development
+              </h3>
+              <p
+                className={`text-lg mb-4 ${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                Université de Kara
+              </p>
+              <p className={darkMode ? "text-gray-300" : "text-gray-700"}>
+                Research-focused program in economic analysis, quantitative
+                methods, and development economics.
+              </p>
+            </div>
+          </div>
+
+          {/* Certifications */}
+          <div className="mt-16">
+            <h3 className="text-2xl font-bold mb-8">
+              Professional Certifications
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {certifications.map((cert, idx) => (
+                <div
+                  key={idx}
+                  className={`p-4 rounded-lg border-2 transition-all hover:scale-105 ${
+                    darkMode
+                      ? "border-gray-800 bg-gray-900 hover:border-blue-600"
+                      : "border-gray-200 bg-white hover:border-blue-600"
+                  }`}
+                >
+                  <div className="flex items-start">
+                    <Award
+                      className={`w-5 h-5 mr-3 mt-1 flex-shrink-0 ${
+                        darkMode ? "text-blue-400" : "text-blue-600"
+                      }`}
+                    />
+                    <span
+                      className={`text-sm ${
+                        darkMode ? "text-gray-300" : "text-gray-700"
+                      }`}
+                    >
+                      {cert}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section
+        id="projects"
+        className={`py-20 px-4 sm:px-6 lg:px-8 ${
+          darkMode ? "bg-gray-800/50" : "bg-gray-50"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center mb-4">
+            <Code
+              className={`w-8 h-8 mr-4 ${
+                darkMode ? "text-blue-400" : "text-blue-600"
+              }`}
+            />
+            <h2 className="text-4xl font-bold">Featured Projects</h2>
+          </div>
+          <p
+            className={`text-lg mb-12 ${
+              darkMode ? "text-gray-400" : "text-gray-600"
+            }`}
+          >
+            Personal projects demonstrating expertise in AI/ML, computer vision,
+            NLP, and data engineering
+          </p>
+
+          {projects.map((category, catIdx) => (
+            <div key={catIdx} className="mb-16">
+              <h3
+                className={`text-2xl font-bold mb-8 ${
+                  darkMode ? "text-blue-400" : "text-blue-600"
+                }`}
+              >
+                {category.category}
+              </h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {category.items.map((project, projIdx) => (
+                  <div
+                    key={projIdx}
+                    className={`rounded-xl p-6 transition-all hover:shadow-2xl hover:scale-105 ${
+                      darkMode
+                        ? "bg-gray-900 hover:bg-gray-800"
+                        : "bg-white hover:bg-gray-50"
+                    }`}
+                  >
+                    <div
+                      className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
+                        darkMode ? "bg-blue-600/20" : "bg-blue-100"
+                      }`}
+                    >
+                      <div
+                        className={darkMode ? "text-blue-400" : "text-blue-600"}
+                      >
+                        {project.icon}
+                      </div>
+                    </div>
+                    <h4 className="text-xl font-bold mb-3">{project.title}</h4>
+                    <p
+                      className={`mb-4 ${
+                        darkMode ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    >
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.stack.map((tech, techIdx) => (
+                        <span
+                          key={techIdx}
+                          className={`px-2 py-1 rounded text-xs ${
+                            darkMode
+                              ? "bg-gray-800 text-gray-300"
+                              : "bg-gray-100 text-gray-700"
+                          }`}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center mb-4">
+            <Database
+              className={`w-8 h-8 mr-4 ${
+                darkMode ? "text-blue-400" : "text-blue-600"
+              }`}
+            />
+            <h2 className="text-4xl font-bold">Technical Skills</h2>
+          </div>
+          <p
+            className={`text-lg mb-12 ${
+              darkMode ? "text-gray-400" : "text-gray-600"
+            }`}
+          >
+            Comprehensive skill set across data analysis, machine learning, and
+            business intelligence
+          </p>
+
+          {/* Key Strengths */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-bold mb-6">Key Strengths</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                {
+                  title: "Statistical Analysis & Modeling",
+                  desc: "Forecasting, classification, and predictive analytics",
+                },
+                {
+                  title: "Data Quality & Structure",
+                  desc: "Data validation, consistency checks, and freshness monitoring",
+                },
+                {
+                  title: "Visualization & Reporting",
+                  desc: "Power BI, Looker Studio, and advanced Excel dashboards",
+                },
+                {
+                  title: "Automation & Integration",
+                  desc: "ETL pipelines, Azure Data Factory, and Dataiku workflows",
+                },
+                {
+                  title: "Cross-team Collaboration",
+                  desc: "Translating business needs into technical solutions",
+                },
+                {
+                  title: "Technical Communication",
+                  desc: "Presenting insights to stakeholders and documentation",
+                },
+              ].map((strength, idx) => (
+                <div
+                  key={idx}
+                  className={`p-6 rounded-xl transition-all hover:shadow-xl ${
+                    darkMode
+                      ? "bg-gray-900 hover:bg-gray-800"
+                      : "bg-white hover:bg-gray-50"
+                  }`}
+                >
+                  <h4
+                    className={`font-bold mb-2 ${
+                      darkMode ? "text-blue-400" : "text-blue-600"
+                    }`}
+                  >
+                    {strength.title}
+                  </h4>
+                  <p
+                    className={`text-sm ${
+                      darkMode ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    {strength.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Technical Stack */}
+          <div className="grid md:grid-cols-2 gap-8">
+            <div
+              className={`rounded-xl p-8 ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <h3 className="text-xl font-bold mb-6 flex items-center">
+                <Code
+                  className={`w-6 h-6 mr-2 ${
+                    darkMode ? "text-blue-400" : "text-blue-600"
+                  }`}
+                />
+                Programming Languages
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.languages.map((lang, idx) => (
+                  <span
+                    key={idx}
+                    className={`px-4 py-2 rounded-lg font-medium ${
+                      darkMode
+                        ? "bg-blue-600/20 text-blue-400"
+                        : "bg-blue-100 text-blue-600"
+                    }`}
+                  >
+                    {lang}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div
+              className={`rounded-xl p-8 ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <h3 className="text-xl font-bold mb-6 flex items-center">
+                <BarChart3
+                  className={`w-6 h-6 mr-2 ${
+                    darkMode ? "text-blue-400" : "text-blue-600"
+                  }`}
+                />
+                Data Visualization
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.dataViz.map((tool, idx) => (
+                  <span
+                    key={idx}
+                    className={`px-4 py-2 rounded-lg font-medium ${
+                      darkMode
+                        ? "bg-blue-600/20 text-blue-400"
+                        : "bg-blue-100 text-blue-600"
+                    }`}
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div
+              className={`rounded-xl p-8 ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <h3 className="text-xl font-bold mb-6 flex items-center">
+                <Database
+                  className={`w-6 h-6 mr-2 ${
+                    darkMode ? "text-blue-400" : "text-blue-600"
+                  }`}
+                />
+                ETL & Data Integration
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.etl.map((tool, idx) => (
+                  <span
+                    key={idx}
+                    className={`px-4 py-2 rounded-lg font-medium ${
+                      darkMode
+                        ? "bg-blue-600/20 text-blue-400"
+                        : "bg-blue-100 text-blue-600"
+                    }`}
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div
+              className={`rounded-xl p-8 ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <h3 className="text-xl font-bold mb-6 flex items-center">
+                <Brain
+                  className={`w-6 h-6 mr-2 ${
+                    darkMode ? "text-blue-400" : "text-blue-600"
+                  }`}
+                />
+                Machine Learning & AI
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.ml.slice(0, 8).map((tool, idx) => (
+                  <span
+                    key={idx}
+                    className={`px-4 py-2 rounded-lg font-medium ${
+                      darkMode
+                        ? "bg-blue-600/20 text-blue-400"
+                        : "bg-blue-100 text-blue-600"
+                    }`}
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+              <p
+                className={`text-sm mt-4 ${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                + {skills.ml.length - 8} more technologies
+              </p>
+            </div>
+
+            <div
+              className={`rounded-xl p-8 ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <h3 className="text-xl font-bold mb-6">Databases & Platforms</h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.databases.map((db, idx) => (
+                  <span
+                    key={idx}
+                    className={`px-4 py-2 rounded-lg font-medium ${
+                      darkMode
+                        ? "bg-blue-600/20 text-blue-400"
+                        : "bg-blue-100 text-blue-600"
+                    }`}
+                  >
+                    {db}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div
+              className={`rounded-xl p-8 ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <h3 className="text-xl font-bold mb-6">Cloud & DevOps</h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.tools.map((tool, idx) => (
+                  <span
+                    key={idx}
+                    className={`px-4 py-2 rounded-lg font-medium ${
+                      darkMode
+                        ? "bg-blue-600/20 text-blue-400"
+                        : "bg-blue-100 text-blue-600"
+                    }`}
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Methodologies */}
+          <div className="mt-8">
+            <div
+              className={`rounded-xl p-8 ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <h3 className="text-xl font-bold mb-6">
+                Methodologies & Practices
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {skills.methodologies.map((method, idx) => (
+                  <span
+                    key={idx}
+                    className={`px-4 py-2 rounded-lg font-medium ${
+                      darkMode
+                        ? "bg-blue-600/20 text-blue-400"
+                        : "bg-blue-100 text-blue-600"
+                    }`}
+                  >
+                    {method}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Languages */}
+          <div className="mt-8">
+            <div
+              className={`rounded-xl p-8 ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <h3 className="text-xl font-bold mb-6">Languages</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="flex items-center justify-between">
+                  <span className="font-medium">French</span>
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm ${
+                      darkMode
+                        ? "bg-green-600/20 text-green-400"
+                        : "bg-green-100 text-green-600"
+                    }`}
+                  >
+                    Native
+                  </span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="font-medium">English</span>
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm ${
+                      darkMode
+                        ? "bg-blue-600/20 text-blue-400"
+                        : "bg-blue-100 text-blue-600"
+                    }`}
+                  >
+                    B2 - TOEIC
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Impact Metrics Section */}
+      <section
+        className={`py-20 px-4 sm:px-6 lg:px-8 ${
+          darkMode ? "bg-gray-800/50" : "bg-gray-50"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold mb-4 text-center">
+            Impact by Numbers
+          </h2>
+          <p
+            className={`text-center text-lg mb-12 ${
+              darkMode ? "text-gray-400" : "text-gray-600"
+            }`}
+          >
+            Measurable results from recent projects
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div
+              className={`text-center p-6 rounded-xl ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <div
+                className={`text-4xl md:text-5xl font-bold mb-2 ${
+                  darkMode ? "text-blue-400" : "text-blue-600"
+                }`}
+              >
+                27
+              </div>
+              <div
+                className={`text-sm ${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                Factories Scaled
+              </div>
+              <div
+                className={`text-xs mt-2 ${
+                  darkMode ? "text-gray-500" : "text-gray-500"
+                }`}
+              >
+                AI Architecture Deployment
+              </div>
+            </div>
+            <div
+              className={`text-center p-6 rounded-xl ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <div
+                className={`text-4xl md:text-5xl font-bold mb-2 ${
+                  darkMode ? "text-blue-400" : "text-blue-600"
+                }`}
+              >
+                100%
+              </div>
+              <div
+                className={`text-sm ${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                Automation Rate
+              </div>
+              <div
+                className={`text-xs mt-2 ${
+                  darkMode ? "text-gray-500" : "text-gray-500"
+                }`}
+              >
+                Label Traceability System
+              </div>
+            </div>
+            <div
+              className={`text-center p-6 rounded-xl ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <div
+                className={`text-4xl md:text-5xl font-bold mb-2 ${
+                  darkMode ? "text-blue-400" : "text-blue-600"
+                }`}
+              >
+                3+
+              </div>
+              <div
+                className={`text-sm ${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                Business Units
+              </div>
+              <div
+                className={`text-xs mt-2 ${
+                  darkMode ? "text-gray-500" : "text-gray-500"
+                }`}
+              >
+                Cross-functional Collaboration
+              </div>
+            </div>
+            <div
+              className={`text-center p-6 rounded-xl ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <div
+                className={`text-4xl md:text-5xl font-bold mb-2 ${
+                  darkMode ? "text-blue-400" : "text-blue-600"
+                }`}
+              >
+                40%+
+              </div>
+              <div
+                className={`text-sm ${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                Time Saved
+              </div>
+              <div
+                className={`text-xs mt-2 ${
+                  darkMode ? "text-gray-500" : "text-gray-500"
+                }`}
+              >
+                Report Automation & KPIs
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership Section */}
+      <section id="leadership" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center mb-4">
+            <Award
+              className={`w-8 h-8 mr-4 ${
+                darkMode ? "text-blue-400" : "text-blue-600"
+              }`}
+            />
+            <h2 className="text-4xl font-bold">Leadership & Involvement</h2>
+          </div>
+          <p
+            className={`text-lg mb-12 ${
+              darkMode ? "text-gray-400" : "text-gray-600"
+            }`}
+          >
+            Community engagement and organizational leadership
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Main Leadership Role */}
+            <div
+              className={`rounded-xl p-8 transition-all hover:shadow-xl ${
+                darkMode
+                  ? "bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-blue-600/30"
+                  : "bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200"
+              }`}
+            >
+              <div
+                className={`inline-flex items-center px-4 py-2 rounded-full mb-6 ${
+                  darkMode
+                    ? "bg-blue-600/30 text-blue-300"
+                    : "bg-blue-200 text-blue-700"
+                }`}
+              >
+                <Award className="w-5 h-5 mr-2" />
+                <span className="font-semibold">Current Position</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-4">National President</h3>
+              <p
+                className={`text-xl mb-6 ${
+                  darkMode ? "text-blue-400" : "text-blue-600"
+                }`}
+              >
+                Jeunesse de l'Ordre des Chevaliers de Saint Jean International
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <ChevronRight
+                    className={`w-5 h-5 mr-2 mt-1 flex-shrink-0 ${
+                      darkMode ? "text-blue-400" : "text-blue-600"
+                    }`}
+                  />
+                  <span>
+                    Leading national youth organization initiatives and
+                    strategic planning
+                  </span>
+                </div>
+                <div className="flex items-start">
+                  <ChevronRight
+                    className={`w-5 h-5 mr-2 mt-1 flex-shrink-0 ${
+                      darkMode ? "text-blue-400" : "text-blue-600"
+                    }`}
+                  />
+                  <span>
+                    Coordinating cross-regional activities and community
+                    engagement programs
+                  </span>
+                </div>
+                <div className="flex items-start">
+                  <ChevronRight
+                    className={`w-5 h-5 mr-2 mt-1 flex-shrink-0 ${
+                      darkMode ? "text-blue-400" : "text-blue-600"
+                    }`}
+                  />
+                  <span>
+                    Developing leadership skills through mentorship and team
+                    management
+                  </span>
+                </div>
+                <div className="flex items-start">
+                  <ChevronRight
+                    className={`w-5 h-5 mr-2 mt-1 flex-shrink-0 ${
+                      darkMode ? "text-blue-400" : "text-blue-600"
+                    }`}
+                  />
+                  <span>
+                    Building partnerships and representing the organization at
+                    national events
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Interests & Additional Activities */}
+            <div className="space-y-8">
+              <div
+                className={`rounded-xl p-8 ${
+                  darkMode ? "bg-gray-900" : "bg-white"
+                }`}
+              >
+                <h3 className="text-xl font-bold mb-6">Interests & Hobbies</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <div
+                      className={`w-10 h-10 rounded-lg flex items-center justify-center mr-4 ${
+                        darkMode ? "bg-blue-600/20" : "bg-blue-100"
+                      }`}
+                    >
+                      <span className="text-2xl">🎹</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Music</p>
+                      <p
+                        className={`text-sm ${
+                          darkMode ? "text-gray-400" : "text-gray-600"
+                        }`}
+                      >
+                        Piano & Guitar
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div
+                      className={`w-10 h-10 rounded-lg flex items-center justify-center mr-4 ${
+                        darkMode ? "bg-blue-600/20" : "bg-blue-100"
+                      }`}
+                    >
+                      <span className="text-2xl">✈️</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Travel</p>
+                      <p
+                        className={`text-sm ${
+                          darkMode ? "text-gray-400" : "text-gray-600"
+                        }`}
+                      >
+                        Cultural exploration
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div
+                      className={`w-10 h-10 rounded-lg flex items-center justify-center mr-4 ${
+                        darkMode ? "bg-blue-600/20" : "bg-blue-100"
+                      }`}
+                    >
+                      <span className="text-2xl">🤝</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Community Service</p>
+                      <p
+                        className={`text-sm ${
+                          darkMode ? "text-gray-400" : "text-gray-600"
+                        }`}
+                      >
+                        Active involvement in associations
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={`rounded-xl p-8 ${
+                  darkMode ? "bg-gray-900" : "bg-white"
+                }`}
+              >
+                <h3 className="text-xl font-bold mb-4">What Drives Me</h3>
+                <p className={darkMode ? "text-gray-300" : "text-gray-700"}>
+                  I'm passionate about leveraging data and AI to solve
+                  real-world problems. Whether it's optimizing production lines
+                  for 27 factories or building intelligent systems that
+                  understand human emotions, I thrive on transforming complex
+                  data into actionable insights that drive business growth and
+                  innovation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials / Recommendations Section */}
+      <section
+        className={`py-20 px-4 sm:px-6 lg:px-8 ${
+          darkMode ? "bg-gray-800/50" : "bg-gray-50"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold mb-4 text-center">
+            Professional Recommendations
+          </h2>
+          <p
+            className={`text-center text-lg mb-12 ${
+              darkMode ? "text-gray-400" : "text-gray-600"
+            }`}
+          >
+            What colleagues and managers say about working with me
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div
+              className={`rounded-xl p-8 ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <div className="flex items-center mb-6">
+                <div
+                  className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold mr-4 ${
+                    darkMode
+                      ? "bg-blue-600/20 text-blue-400"
+                      : "bg-blue-100 text-blue-600"
+                  }`}
+                >
+                  GB
+                </div>
+                <div>
+                  <p className="font-bold">Remy - Industrie 4.0 Director</p>
+                  <p
+                    className={`text-sm ${
+                      darkMode ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    Groupe BEL
+                  </p>
+                </div>
+              </div>
+              <p
+                className={`italic mb-4 ${
+                  darkMode ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
+                "Julien's ability to design our AI architecture across 27
+                factories was exceptional. His technical expertise combined with
+                strong project management skills made him invaluable to our
+                digital transformation."
+              </p>
+              <div className="flex text-yellow-500">{"★".repeat(5)}</div>
+            </div>
+
+            <div
+              className={`rounded-xl p-8 ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <div className="flex items-center mb-6">
+                <div
+                  className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold mr-4 ${
+                    darkMode
+                      ? "bg-blue-600/20 text-blue-400"
+                      : "bg-blue-100 text-blue-600"
+                  }`}
+                >
+                  BF
+                </div>
+                <div>
+                  <p className="font-bold">Hubert - Data Manager</p>
+                  <p
+                    className={`text-sm ${
+                      darkMode ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    Business France
+                  </p>
+                </div>
+              </div>
+              <p
+                className={`italic mb-4 ${
+                  darkMode ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
+                "Having been Julien's manager during his time at Business
+                France, I can only praise his initiative, motivation, and
+                commitment to projects, in addition to his skills as a data
+                quality analyst, particularly in PowerBi and Dax. He is also a
+                friendly person who integrated perfectly into our department and
+                was able to build good relationships with our users and service
+                providers."
+              </p>
+              <div className="flex text-yellow-500">{"★".repeat(5)}</div>
+            </div>
+
+            <div
+              className={`rounded-xl p-8 ${
+                darkMode ? "bg-gray-900" : "bg-white"
+              }`}
+            >
+              <div className="flex items-center mb-6">
+                <div
+                  className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold mr-4 ${
+                    darkMode
+                      ? "bg-blue-600/20 text-blue-400"
+                      : "bg-blue-100 text-blue-600"
+                  }`}
+                >
+                  SA
+                </div>
+                <div>
+                  <p className="font-bold">Clément - BI Director</p>
+                  <p
+                    className={`text-sm ${
+                      darkMode ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    Sector Alarm
+                  </p>
+                </div>
+              </div>
+              <p
+                className={`italic mb-4 ${
+                  darkMode ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
+                "Julien quickly understood our business needs and translated
+                them into actionable KPIs. His automation of weekly reports
+                saved our team countless hours and provided a unified view of
+                performance."
+              </p>
+              <div className="flex text-yellow-500">{"★".repeat(5)}</div>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <p
+              className={`text-sm ${
+                darkMode ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
+              Want to see more recommendations?{" "}
+              <a
+                href="https://www.linkedin.com/in/julien-hodonou"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`font-medium hover:underline ${
+                  darkMode ? "text-blue-400" : "text-blue-600"
+                }`}
+              >
+                View my LinkedIn profile
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Let's Work Together
+          </h2>
+          <p
+            className={`text-xl mb-12 ${
+              darkMode ? "text-gray-400" : "text-gray-600"
+            }`}
+          >
+            Open to Data Science and Business Intelligence opportunities where I
+            can drive impact through AI/ML and advanced analytics
+          </p>
+
+          <div
+            className={`rounded-2xl p-12 mb-12 ${
+              darkMode
+                ? "bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-blue-600/30"
+                : "bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200"
+            }`}
+          >
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <div
+                className={`p-6 rounded-xl ${
+                  darkMode ? "bg-gray-900/50" : "bg-white/50"
+                }`}
+              >
+                <Mail
+                  className={`w-8 h-8 mx-auto mb-4 ${
+                    darkMode ? "text-blue-400" : "text-blue-600"
+                  }`}
+                />
+                <p className="font-medium mb-2">Email</p>
+                <a
+                  href="mailto:julienhodonou21@gmail.com"
+                  className={`hover:underline ${
+                    darkMode ? "text-blue-400" : "text-blue-600"
+                  }`}
+                >
+                  julienhodonou21@gmail.com
+                </a>
+              </div>
+              <div
+                className={`p-6 rounded-xl ${
+                  darkMode ? "bg-gray-900/50" : "bg-white/50"
+                }`}
+              >
+                <span className="text-2xl mb-4 block">📱</span>
+                <p className="font-medium mb-2">Phone</p>
+                <a
+                  href="tel:+33758504941"
+                  className={`hover:underline ${
+                    darkMode ? "text-blue-400" : "text-blue-600"
+                  }`}
+                >
+                  +33 7 58 50 49 41
+                </a>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              <a
+                href="https://www.linkedin.com/in/julien-hodonou"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center px-6 py-3 rounded-lg font-medium transition-all ${
+                  darkMode
+                    ? "bg-blue-600 hover:bg-blue-700 text-white"
+                    : "bg-blue-600 hover:bg-blue-700 text-white"
+                }`}
+              >
+                <Linkedin className="w-5 h-5 mr-2" />
+                Connect on LinkedIn
+              </a>
+              <a
+                href="https://github.com/JulBiDaBi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center px-6 py-3 rounded-lg font-medium transition-all ${
+                  darkMode
+                    ? "border-2 border-gray-700 hover:border-blue-400 hover:text-blue-400"
+                    : "border-2 border-gray-300 hover:border-blue-600 hover:text-blue-600"
+                }`}
+              >
+                <Github className="w-5 h-5 mr-2" />
+                View GitHub
+              </a>
+              <button
+                onClick={() => window.open("#", "_blank")}
+                className={`inline-flex items-center px-6 py-3 rounded-lg font-medium transition-all ${
+                  darkMode
+                    ? "border-2 border-gray-700 hover:border-blue-400 hover:text-blue-400"
+                    : "border-2 border-gray-300 hover:border-blue-600 hover:text-blue-600"
+                }`}
+              >
+                <Download className="w-5 h-5 mr-2" />
+                Download Resume
+              </button>
+            </div>
+
+            <div
+              className={`inline-flex items-center px-6 py-3 rounded-full ${
+                darkMode
+                  ? "bg-green-600/20 text-green-400"
+                  : "bg-green-100 text-green-600"
+              }`}
+            >
+              <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse mr-3"></span>
+              <span className="font-medium">
+                Available for immediate opportunities
+              </span>
+            </div>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <div>
+              <div
+                className={`text-3xl font-bold mb-2 ${
+                  darkMode ? "text-blue-400" : "text-blue-600"
+                }`}
+              >
+                2+
+              </div>
+              <div
+                className={`text-sm ${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                Years Experience
+              </div>
+            </div>
+            <div>
+              <div
+                className={`text-3xl font-bold mb-2 ${
+                  darkMode ? "text-blue-400" : "text-blue-600"
+                }`}
+              >
+                7+
+              </div>
+              <div
+                className={`text-sm ${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                Certifications
+              </div>
+            </div>
+            <div>
+              <div
+                className={`text-3xl font-bold mb-2 ${
+                  darkMode ? "text-blue-400" : "text-blue-600"
+                }`}
+              >
+                10+
+              </div>
+              <div
+                className={`text-sm ${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                Projects Completed
+              </div>
+            </div>
+            <div>
+              <div
+                className={`text-3xl font-bold mb-2 ${
+                  darkMode ? "text-blue-400" : "text-blue-600"
+                }`}
+              >
+                3
+              </div>
+              <div
+                className={`text-sm ${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                Companies Served
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer
+        className={`py-8 px-4 border-t ${
+          darkMode ? "bg-gray-900 border-gray-800" : "bg-white border-gray-200"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto text-center">
+          <p className={darkMode ? "text-gray-400" : "text-gray-600"}>
+            © 2025 Julien Hodonou. Built with React & Tailwind CSS.
+          </p>
+          <p
+            className={`text-sm mt-2 ${
+              darkMode ? "text-gray-500" : "text-gray-500"
+            }`}
+          >
+            Turning complex data into strategic business decisions.
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default MyPortfolio;
+
+---------------------------------------------------------
+==> 
